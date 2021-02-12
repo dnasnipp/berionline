@@ -1,0 +1,56 @@
+include ./mixins/navigation.pug
+include ./mixins/product.pug
+include ./mixins/slide.pug
+
+- var navArr = [["/", "Главная", true], ["./contacts.html", "Контакты"], ["./aboutus.html", "О нас"]]
+- var catsArr = ["Кроссовки", "Детская обувь", "Туфли", "Беговая обувь", "Ботинки", "Шапки", "Футболки", "Майки", "Штаны", "Удлинённые шорты", "Шорты"]
+- var product = ['/product1', './images/product1.jpg', 'product img', 'Какой-то продукт', ' самый распространённый из оптических приборов, предназначенный для коррекции человеческого зрения при оптических несовершенствах глаза либо для защиты глаз от различных вредных воздействий. Очки состоят из линз, стеклянных или пластиковых, удерживаемых оправой, с прикреплёнными к ней дужками.', '3019 руб', '/cat', 'Какая-то > Категория > Подкатегория', [['/act', 'Какая-то акция, которая проходит только раз в год'], ['/act', 'Какая-то акция, которая проходит только раз в год']], '10 руб']
+- var productCount = 10
+- var slideImgs = ['./images/slide1.jpeg', './images/slide2.jpg', './images/slide3.jpg', './images/slide4.jpeg']
+
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Berionline | Про лучшие цены мы знаем всё!
+        meta(name="theme-color" content="#000")
+        link(rel="shortcut icon", href="./images/favicon.ico", type="image/x-icon")
+        link(rel="stylesheet", href="./styles/main.css")
+    body
+        +navigation(navArr)
+        .content
+            .content__left
+                form(action="/someaction", method="get").search
+                    input(type="text", name="query" placeholder="Введите что-нибудь. Например: Кроссовки").search__input.input
+                    button(type="submit").search__submit.btn
+                        | <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.005 512.005" class="search__icon"><path d="M505.749 475.587l-145.6-145.6c28.203-34.837 45.184-79.104 45.184-127.317C405.333 90.926 314.41.003 202.666.003S0 90.925 0 202.669s90.923 202.667 202.667 202.667c48.213 0 92.48-16.981 127.317-45.184l145.6 145.6c4.16 4.16 9.621 6.251 15.083 6.251s10.923-2.091 15.083-6.251c8.341-8.341 8.341-21.824-.001-30.165zM202.667 362.669c-88.235 0-160-71.765-160-160s71.765-160 160-160 160 71.765 160 160-71.766 160-160 160z"/></svg>
+                section.categories
+                    h4.categories__header Категории:
+                    ul.categories__list
+                        each x in catsArr
+                            li.categories__item
+                                a(href="/some/?cat=asd").categories__link=x
+                section.filters
+                    .filter
+                        h4.filter__header Цена:
+                        .filter__price-filter
+                            .filter__current-price
+                                .filter__min-price 100 руб
+                                .filter__max-price 23123 руб
+                main.products
+                    each _ in Array(productCount)
+                        +product(product)
+                    .pages
+                        a(href="sdasdsd").pages__btn.btn.btn_current 1
+                        each value, key in Array(19)
+                            a(href="sdasdsd").btn.pages__btn=key+2
+            .content__right
+                .content__sticky
+                    .slider 
+                        .slider__slides
+                            each slideImg in slideImgs 
+                                +slide(slideImg)
+                        .slider__pagination
+        footer.footer
+        script(src="./scripts/main.js")

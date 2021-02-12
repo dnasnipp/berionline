@@ -1,0 +1,9 @@
+mixin navigation(navArr)
+    nav.navigation
+        ul.navigation__list
+            each x in navArr
+                li.navigation__list-item
+                    if x[2]
+                        a(href=x[0]).navigation__link.navigation__link_active=x[1]
+                    else
+                        a(href=x[0]).navigation__link=x[1]

@@ -1,0 +1,64 @@
+@import './libs/reset.scss';
+@import './libs/colors.scss';
+@import './libs/fonts.scss';
+@import './libs/components.scss';
+
+body {
+    background-color: $mainTextColor;
+    transition: background-color .7s;
+}
+
+.back-btn {
+    display: block;
+    width: 2.6rem;
+    height: 2.6rem;
+    padding: 0;
+    margin: 2rem;
+    transition: opacity .6s, border-color .2s;
+
+    &:hover {
+        box-shadow: none;
+        background: none;
+    }
+
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: -1px;
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        border: 1px solid #fff;
+        transition: transform .2s;
+    }
+
+    &:hover {
+        border-color: $secondColor;
+        transition: border-color .2s;
+
+        &::before {
+            transition: transform .2s;
+            transform: scale(1.5);
+        }
+    }
+
+    &:hover &__icon {
+        fill: $secondColor;
+        transition: fill .2s;
+    }
+
+    &_hidden {
+        opacity: 0;
+    }
+
+    .back-btn__icon {
+        position: absolute;
+        width: 65%;
+        fill: #fff;
+        left: 50%;
+        top: 50%;
+        transform: translate(-58%,-50%) rotate(90deg);
+        transition: fill .2s;
+    }
+}

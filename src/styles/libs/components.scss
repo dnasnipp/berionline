@@ -1,0 +1,68 @@
+.btn {
+    outline: none;
+    background-color: $mainColor;
+    color: $mainTextColor;
+    border: none;
+    position: relative;
+    user-select: none;
+    text-decoration: none;
+    -webkit-user-drag: none;
+    
+    &_current {
+        background-color: $secondColor;
+        
+        &:hover {
+            background-color: $secondColor !important;
+            box-shadow: 0 0 1rem 0 $secondColor !important;
+        }
+    }
+
+    &_border {
+        padding: .3em;
+        background-color: none;
+        border: 2px solid;
+    }
+
+    &_round {
+        border-radius: 50%;
+    }
+
+    &_white {
+        color: #fff;
+        border-color: #fff;
+    }
+
+    &:hover {
+        background-color: $lightMainColor;
+        box-shadow: 0 0 .9rem 0 $shadowColor;
+        cursor: pointer;
+    }
+}
+
+.footer {
+    font-family: 'PT Serif';
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 2rem;
+    margin: 0 15% 0;
+    background-color: $mainColor;
+    color: $mainTextColor;
+
+    &::selection {
+        color: $mainTextColor;
+        background-color: $secondColor;
+    }
+}
+
+.input {
+    font-family: 'Montserrat';
+    font-size: 1.6rem;
+    border-radius: 0;
+    border: 1px solid $mainColor;
+    padding: .5rem 1.5rem;
+    outline: none;
+
+    &:focus {
+        box-shadow: 0 0 .4rem $shadowColor;
+    }
+}

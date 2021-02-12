@@ -1,0 +1,26 @@
+mixin product(productArr)
+    section.product
+        a(href=productArr[0]).product__main-content
+            .product__img
+                img(src=productArr[1] alt=productArr[2]).product__img-src
+            .product__text
+                h2.product__title=productArr[3]
+                h3.product__description=productArr[4]
+                h2.product__price
+                    | Цена:
+                    - if(productArr[9])
+                        span.product__current-price.product__current-price_line=productArr[5]
+                        span.product__discount-price=productArr[9]
+                    - else 
+                        span.product__current-price=productArr[5]
+                        span.product__discount-price=productArr[9]
+                h4(data-href=productArr[6]).product__cats=productArr[7]
+        .product__footer
+            .btn.product__footer-header
+                span.product__footer-icon +
+                | Акции
+            ul.product__discounts.product__discounts_hidden
+                each x in productArr[8]
+                    li.product__discount
+                        a(href=x[0]).product__discount-link=x[1]
+                        .product__promo Промокод: Не указан
