@@ -31,13 +31,6 @@ html(lang="en")
                         each x in catsArr
                             li.categories__item
                                 a(href="/some/?cat=asd").categories__link=x
-                section.filters
-                    .filter
-                        h4.filter__header Цена:
-                        .filter__price-filter
-                            .filter__current-price
-                                .filter__min-price 100 руб
-                                .filter__max-price 23123 руб
                 main.products
                     each _ in Array(productCount)
                         +product(product)
