@@ -1,4 +1,4 @@
-// IE11 Polyfill to NodeList.forEach
+// IE11 Polyfill for NodeList.forEach
 if (window.NodeList && !NodeList.prototype.forEach) {
     NodeList.prototype.forEach = function (callback, thisArg) {
         thisArg = thisArg || window;
