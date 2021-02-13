@@ -20,7 +20,7 @@ document.querySelectorAll<HTMLElement>('.product').forEach((i: HTMLElement) => {
     new Product(i);
 });
 
-// Extends Siema to make able to create pagination.
+// Extends Siema prototype to make able to create pagination.
 
 Siema.prototype.addPagination = function(sliderPagination: HTMLElement) {
 
@@ -43,7 +43,7 @@ Siema.prototype.addPagination = function(sliderPagination: HTMLElement) {
 // Slider initialization
 
 const sliderElm: HTMLElement | null = document.querySelector('.slider');
-const SLIDER_TIME_TO_SWITCH =  3000;
+const SLIDER_TIME_TO_SWITCH: number =  3000;
 
 if(sliderElm !== null) {
     const sliderPagination: HTMLElement | null = sliderElm!.querySelector('.slider__pagination');
@@ -72,8 +72,6 @@ let nav: HTMLElement | null = document.querySelector('.navigation');
 
 if(nav !== null) {
     let navController: Navigation;
-
-    // Checks active link, if active link isnt then it will be fixed
 
     try {
         navController = new Navigation(nav);
@@ -109,7 +107,39 @@ if(footer !== null) {
     footer.innerHTML = `Copyright © 2019-${new Date().getFullYear()}, BERIONLINE.RU`;
 }
 
-if(!localStorage.getItem('cacheAcc')) {
-    alert(1);
-    localStorage.setItem('cacheAcc', 'HI');
+// Disclaimer popup and Policy
+
+let disclaimer: HTMLElement | null = document.querySelector('.disclaimer');
+let disclaimerBtn: HTMLElement | null = document.querySelector('.disclaimer__btn');
+let disclaimerPolicy: HTMLElement | null = document.querySelector('.disclaimer__link');
+let policy: HTMLElement | null = document.querySelector('.policy');
+
+if(disclaimer !== null && !localStorage.getItem('disclaimer')) {
+    disclaimer.classList.remove('disclaimer_hidden');
+}
+
+if(disclaimerBtn !== null && disclaimerPolicy !== null && policy !== null) {
+    
+    disclaimerBtn?.addEventListener('click', () => {
+        localStorage.setItem('disclaimer', '1');
+        disclaimer?.classList.add('disclaimer_hidden');
+    });
+
+    disclaimerPolicy?.addEventListener('click', (e: Event) => {
+        e.preventDefault();
+        document.body.style.overflowY = 'hidden';
+
+        if(policy !== null) {
+            policy.classList.remove('policy_hidden');
+        }
+    });
+
+    policy?.addEventListener('click', (e: Event) => {
+        let elms: NodeListOf<HTMLElement> | undefined = policy?.querySelectorAll<HTMLElement>('*');
+
+        if(e.target === policy) {
+            document.body.style.overflowY = 'scroll';
+            policy?.classList.add('policy_hidden');
+        }
+    });
 }

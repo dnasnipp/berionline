@@ -1,4 +1,5 @@
 .btn {
+    display: inline-block;
     outline: none;
     background-color: $mainColor;
     color: $mainTextColor;
@@ -18,9 +19,12 @@
     }
 
     &_border {
-        padding: .3em;
-        background-color: none;
+        background: none;
         border: 2px solid;
+
+        &:hover {
+            background: none;
+        }
     }
 
     &_round {

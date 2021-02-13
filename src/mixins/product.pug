@@ -9,11 +9,10 @@ mixin product(productArr)
                 h2.product__price
                     | Цена:
                     - if(productArr[9])
-                        span.product__current-price.product__current-price_line=productArr[5]
-                        span.product__discount-price=productArr[9]
+                        span.product__old-price=productArr[5]
+                        =productArr[9]
                     - else 
-                        span.product__current-price=productArr[5]
-                        span.product__discount-price=productArr[9]
+                        =productArr[9]
                 h4(data-href=productArr[6]).product__cats=productArr[7]
         .product__footer
             .btn.product__footer-header

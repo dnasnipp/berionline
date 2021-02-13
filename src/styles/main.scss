@@ -4,11 +4,6 @@
 @import './libs/components.scss';
 
 // Reusable styles and Index.html
-
-.line-through {
-    text-decoration: line-through;
-}
-
 .navigation {
     text-align: center;
 
@@ -207,18 +202,10 @@
 .filters {
     display: flex;
     padding-bottom: 3rem;
-    
-    & .filter:nth-child(1) {
-        margin-right: 1rem;
-    }
-
-    & .filter:nth-child(2) {
-        margin-left: 1rem
-    }
 }
 
 .filter {
-    flex-basis: 50%;
+    flex-basis: 100%;
     font-family: 'PT Serif';
     margin-top: 2.5rem;
 
@@ -328,14 +315,11 @@
         color: $mainColor;
     }
 
-    &__current-price {
+    &__old-price {
         margin-left: 1rem;
         margin-right: 1rem;
-
-        &_line {
-            text-decoration: line-through;
-            color: $shadowColor;
-        }
+        text-decoration: line-through;
+        color: $shadowColor;
     }
 
     &__cats {
@@ -425,6 +409,76 @@
         margin: 0 1rem 1rem 0;
         font-size: 1.6rem;
         text-decoration: none;
+    }
+}
+
+.disclaimer {
+    display: block;
+    width: 100%;
+    background-color: $mainTextColor;
+    box-shadow: 0 0 1rem $shadowColor;
+    font-family: 'PT Serif';
+    font-size: 1.6rem;
+    position: fixed;
+    bottom: 0;
+    padding: 2rem;
+    text-align: center;
+
+    &_hidden {
+        display: none;
+    }
+
+    &__text {
+        display: inline-block;
+        margin-right: 1rem;
+    }
+
+    &__link {
+        color: $secondColor;
+    }
+
+    &__btn {
+        padding: .5em 1em;
+        color: $mainColor;
+        border-color: $mainColor;
+
+        &:hover {
+            background: none;
+        }
+    }
+}
+
+.policy {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    font-size: 1.5rem;
+    left: 0;
+    top: 0;
+    background-color: rgba($mainColor, .5);
+
+    &_hidden {
+        display: none;
+    }
+
+    &__list {
+        font-family: 'Montserrat';
+        list-style: decimal;
+        background-color: $mainTextColor;
+        width: 90%;
+        height: 90%;
+        overflow-y: scroll;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 4rem;
+    }
+
+    &__paragraph {
+        margin-bottom: 1rem;
+        line-height: 1.3;
     }
 }
 
