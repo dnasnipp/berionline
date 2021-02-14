@@ -229,6 +229,7 @@
     }
 
     &__title {
+        font-family: 'PT Serif Bold';
         font-size: 2.1rem;
         font-weight: bold;
         color: $mainColor;
@@ -248,9 +249,12 @@
         color: $mainColor;
     }
 
+    &__old-price, &__current-price {
+        margin-left: 1rem;
+    }
+
     &__old-price {
         margin-left: 1rem;
-        margin-right: 1rem;
         text-decoration: line-through;
         color: $shadowColor;
     }
@@ -372,8 +376,6 @@
 
     &__btn {
         padding: .5em 1em;
-        color: $mainColor;
-        border-color: $mainColor;
 
         &:hover {
             background: none;

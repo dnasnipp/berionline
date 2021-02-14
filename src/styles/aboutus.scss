@@ -13,9 +13,10 @@ body {
     width: 2.6rem;
     height: 2.6rem;
     padding: 0;
-    margin: 2rem;
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
     transition: opacity .6s, border-color .2s;
-
     &:hover {
         box-shadow: none;
         background: none;
@@ -60,5 +61,102 @@ body {
         top: 50%;
         transform: translate(-58%,-50%) rotate(90deg);
         transition: fill .2s;
+    }
+}
+
+.main {
+    background: url('../images/slide1.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 15vh 2rem;
+
+    &__text {
+        width: 60%;
+        font-family: 'PT Serif Bold';
+        color: $mainTextColor;
+        margin: 0 auto;
+        text-align: center;
+        transition: opacity 1.7s, transform 1.9s;
+
+        &_hidden {
+            visibility: hidden;
+            opacity: 0;
+            transform: translateX(-20%);
+            transition: opacity 1s, transform .9s;
+        }
+    }
+
+    &__title {
+        font-size: 5.5rem;
+
+        &::selection {
+            background-color: $mainTextColor;
+            color: $mainColor;
+        }
+    }
+
+    &__subtitle {
+        font-family: 'Montserrat';
+        font-size: 1.6rem;
+        margin-top: 2rem;
+        color: $shadowColor;
+        
+        &::selection {
+            background-color: $mainTextColor;
+            color: $mainColor;
+        }
+    }
+}
+
+.cards {
+    font-family: 'PT Serif';
+    padding: 3rem 5%;
+    overflow: hidden;
+
+    &__header {
+        font-size: 5rem;
+        color: $mainTextColor;
+        margin-bottom: 6rem;
+        font-family: 'PT Serif Bold';
+        
+        &::selection {
+            color: $mainTextColor;
+            background-color: $secondColor;
+        }
+    }
+
+    &__list {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__card {
+        width: 22%;
+        padding: 1rem .5%;
+        visibility: visible;
+        transition: transform 1s, opacity 1.4s;
+
+        &_hidden {
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(50%);
+            transition: transform 1.3s, opacity 1.4s;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .cards {
+
+        &__list {
+            display: block;
+
+        }
+
+        &__card {
+            width: 50%;
+            margin: 4rem auto;
+        }
     }
 }

@@ -3,10 +3,37 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
+        title Berionline | О нас
         link(rel="stylesheet", href="./styles/aboutus.css")
+        link(rel="shortcut icon", href="./images/favicon.ico", type="image/x-icon")
     body
         a(href="/").btn.btn_border.btn_white.back-btn.back-btn_hidden
             <svg class="back-btn__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 213.333 213.333"><path d="M0 53.333L106.667 160 213.333 53.333z"/></svg>
-        .some asdasd
+        section.main
+            .main__text.main__text_hidden
+                h3.main__title
+                    span.select.select_blue Berionline
+                    |  - это сервис для поиска лучших цен в интернете
+                h6.main__subtitle Выберите нужную вам цену среди множества магазинов
+        section.cards 
+            h5.cards__header
+                span.select.select_blue.select_underline Преимущества
+                |  нашего сервиса:
+            ul.cards__list
+                li.card.cards__card.cards__card_hidden
+                    img(src="./images/card1.png", alt="card").card__img
+                    h4.card__title Большое количество магазинов
+                    h5.card__description Большое количество магазинов позволяет подобрать наиболее приемлемую цену и качество для вас
+                li.card.cards__card.cards__card_hidden
+                    img(src="./images/card2.png", alt="card").card__img
+                    h4.card__title Постоянные скидки
+                    h5.card__description Вы гарантированно найдёте скидку на интересующий вас товар
+                li.card.cards__card.cards__card_hidden
+                    img(src="./images/card3.png", alt="card").card__img
+                    h4.card__title Оперативная поддержка
+                    h5.card__description Если вы заметили неисправность в работе сайта или у вас есть предложения, то вы можете написать администрации сайта и мгновенно получить ответ
+                li.card.cards__card.cards__card_hidden
+                    img(src="./images/card1.png", alt="card").card__img
+                    h4.card__title Большое количество магазинов
+                    h5.card__description Большое количество магазинов позволяет подобрать наиболее приемлемую цену и качество для вас
         script(src="./scripts/aboutus.js")

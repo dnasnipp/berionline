@@ -9,8 +9,7 @@ export const PRODUCT_CLASSES = Object.freeze(
         descriptionClass: 'product__description',
         priceClass: 'product__price',
         currentPrice: 'product__current-price',
-        priceLineThrough: 'product__current-price_line',
-        discountPrice: 'product__discount-price',
+        oldPrice: 'product__old-price',
         catsClass: 'product__cats',
         discountsClass: 'product__discounts',
         discountsHiddenClass: 'product__discounts_hidden',
@@ -29,7 +28,7 @@ const PRODUCT_MARKUP = `
             <div class="${PRODUCT_CLASSES.textClass}">
                 <h2 class="${PRODUCT_CLASSES.titleClass}">Default</h2>
                 <h3 class="${PRODUCT_CLASSES.descriptionClass}">Default</h3>
-                <h2 class="${PRODUCT_CLASSES.priceClass}">Цена: <span class="${PRODUCT_CLASSES.currentPrice}"></span><span class="${PRODUCT_CLASSES.discountPrice}"></span></h2>
+                <h2 class="${PRODUCT_CLASSES.priceClass}">Цена:<span class="${PRODUCT_CLASSES.oldPrice}"></span><span class="${PRODUCT_CLASSES.currentPrice}"></span></h2>
                 <h4 class="${PRODUCT_CLASSES.catsClass}" data-href="Default">Default</h4>
         </div>
     </a>
@@ -73,19 +72,20 @@ export class Product {
     private data?: ProductProps;
 
     public constructor(product?: HTMLElement, data?: ProductProps) {
-        if(product === undefined && data !== undefined) {
+        
+        if(product === undefined && data) {
             this.data = data;
             this.product = this.genHTMLMarkup(data);
-        } else if (product !== undefined) {
+        } else if (product && data === undefined) {
             this.product = product;
         } else {
-            throw new Error('Product hasnt parent or data');
+            throw new Error('Product params isnt correct');
         }
 
         this.addEventListeners();
     }
 
-    protected getHTMLMarkup(): HTMLElement {
+    public getHTMLMarkup(): HTMLElement {
         return this.product;
     }
 
@@ -100,7 +100,7 @@ export class Product {
             description: this.product.querySelector<HTMLElement>(`.${PRODUCT_CLASSES.descriptionClass}`),
             price: this.product.querySelector<HTMLElement>(`.${PRODUCT_CLASSES.priceClass}`),
             currentPrice: this.product.querySelector<HTMLElement>(`.${PRODUCT_CLASSES.currentPrice}`),
-            discountPrice: this.product.querySelector<HTMLElement>(`.${PRODUCT_CLASSES.discountPrice}`),
+            oldPrice: this.product.querySelector<HTMLElement>(`.${PRODUCT_CLASSES.oldPrice}`),
             cats: this.product.querySelector<HTMLElement>(`.${PRODUCT_CLASSES.catsClass}`),
             discounts: this.product.querySelector<HTMLElement>(`.${PRODUCT_CLASSES.discountsClass}`),
             discountsBtn: this.product.querySelector<HTMLElement>(`.${PRODUCT_CLASSES.discountsBtnClass}`),
@@ -134,6 +134,8 @@ export class Product {
     // Returns HTML Markup of Product from data
 
     private genHTMLMarkup(data: ProductProps): HTMLElement {
+        if(this.product) throw new Error('Element exist');
+
         const root: HTMLElement = document.createElement('section');
         root.classList.add('product');
         root.innerHTML = PRODUCT_MARKUP;
@@ -142,7 +144,7 @@ export class Product {
         this.getHtmlElems().mainContent!.setAttribute('href', data.productLink);
         this.getHtmlElems().imgSrc!.setAttribute('src', data.img);
 
-        if(data.imgAlt !== undefined) {
+        if(data.imgAlt) {
             this.getHtmlElems().imgSrc!.setAttribute('alt', data.imgAlt);
         }
 
@@ -151,14 +153,15 @@ export class Product {
         this.getHtmlElems().cats!.innerHTML = data.cats;
         this.getHtmlElems().cats!.setAttribute('data-href', data.catsLink);
 
-        this.getHtmlElems().currentPrice!.innerHTML = data.price.toString();
-
         if(data.discountPrice) {
-            this.getHtmlElems().currentPrice!.classList.add(`${PRODUCT_CLASSES.priceLineThrough}`);
-            this.getHtmlElems().discountPrice!.innerHTML = data.discountPrice.toString();
+            this.getHtmlElems().currentPrice!.innerHTML = data.discountPrice.toString();
+            this.getHtmlElems().oldPrice!.innerHTML = data.price.toString();
+        } else {
+            this.getHtmlElems().currentPrice!.innerHTML = data.price.toString();
+            this.getHtmlElems().oldPrice!.remove();
         }
 
-        if(data.discounts !== undefined) {
+        if(data.discounts) {
 
             // Creates html Markup of discount item
 

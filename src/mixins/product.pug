@@ -6,13 +6,15 @@ mixin product(productArr)
             .product__text
                 h2.product__title=productArr[3]
                 h3.product__description=productArr[4]
-                h2.product__price
-                    | Цена:
-                    - if(productArr[9])
+                - if(productArr[9])
+                    h2.product__price
+                        | Цена:
                         span.product__old-price=productArr[5]
-                        =productArr[9]
-                    - else 
-                        =productArr[9]
+                        span.product__current-price=productArr[9]
+                - else 
+                    h2.product__price
+                        | Цена:
+                        span.product__current-price=productArr[5]
                 h4(data-href=productArr[6]).product__cats=productArr[7]
         .product__footer
             .btn.product__footer-header

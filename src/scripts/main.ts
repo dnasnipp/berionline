@@ -1,18 +1,10 @@
-// IE11 Polyfill for NodeList.forEach
-if (window.NodeList && !NodeList.prototype.forEach) {
-    NodeList.prototype.forEach = function (callback, thisArg) {
-        thisArg = thisArg || window;
-        for (var i = 0; i < this.length; i++) {
-            callback.call(thisArg, this[i], i, this);
-        }
-    };
-}
-
 import Siema from 'siema'
 
 import { Product, ProductProps, PRODUCT_CLASSES } from './classes/Product'
 
 import { Navigation, NAVIGATION_ACTIVE_LINK_CLASS } from './classes/Navigation'
+
+require('./requires/everywhere');
 
 // Creates Products from HTML Markup
 
@@ -99,13 +91,6 @@ if(nav !== null) {
     });
 }
 
-//  Footer initialization
-
-let footer: HTMLElement | null = document.querySelector('.footer');
-
-if(footer !== null) {
-    footer.innerHTML = `Copyright © 2019-${new Date().getFullYear()}, BERIONLINE.RU`;
-}
 
 // Disclaimer popup and Policy
 
@@ -114,18 +99,20 @@ let disclaimerBtn: HTMLElement | null = document.querySelector('.disclaimer__btn
 let disclaimerPolicy: HTMLElement | null = document.querySelector('.disclaimer__link');
 let policy: HTMLElement | null = document.querySelector('.policy');
 
+localStorage.clear();
+
 if(disclaimer !== null && !localStorage.getItem('disclaimer')) {
     disclaimer.classList.remove('disclaimer_hidden');
 }
 
-if(disclaimerBtn !== null && disclaimerPolicy !== null && policy !== null) {
+if(disclaimer !== null && disclaimerBtn !== null && disclaimerPolicy !== null && policy !== null) {
     
-    disclaimerBtn?.addEventListener('click', () => {
+    disclaimerBtn.addEventListener('click', () => {
         localStorage.setItem('disclaimer', '1');
         disclaimer?.classList.add('disclaimer_hidden');
     });
 
-    disclaimerPolicy?.addEventListener('click', (e: Event) => {
+    disclaimerPolicy.addEventListener('click', (e: Event) => {
         e.preventDefault();
         document.body.style.overflowY = 'hidden';
 
@@ -134,7 +121,7 @@ if(disclaimerBtn !== null && disclaimerPolicy !== null && policy !== null) {
         }
     });
 
-    policy?.addEventListener('click', (e: Event) => {
+    policy.addEventListener('click', (e: Event) => {
         let elms: NodeListOf<HTMLElement> | undefined = policy?.querySelectorAll<HTMLElement>('*');
 
         if(e.target === policy) {
@@ -142,4 +129,12 @@ if(disclaimerBtn !== null && disclaimerPolicy !== null && policy !== null) {
             policy?.classList.add('policy_hidden');
         }
     });
+}
+
+//  Footer initialization
+
+let footer: HTMLElement | null = document.querySelector('.footer');
+
+if(footer !== null) {
+    footer.innerHTML = `Copyright © 2019-${new Date().getFullYear()}, BERIONLINE.RU`;
 }
